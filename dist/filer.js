@@ -25,7 +25,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
   }
 
 }( this, function() {
-
 /**
  * almond 0.2.5 Copyright (c) 2011-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -5551,10 +5550,12 @@ define('intercom',['require','eventemitter','src/shared'],function(require) {
     var storageHandler = function() {
       self._onStorageEvent.apply(self, arguments);
     };
-    if (document.attachEvent) {
-      document.attachEvent('onstorage', storageHandler);
-    } else {
-      window.addEventListener('storage', storageHandler, false);
+    if(typeof window !== 'undefined' && typeof document !== 'undefined') {
+      if (document.attachEvent) {
+        document.attachEvent('onstorage', storageHandler);
+      } else {
+        window.addEventListener('storage', storageHandler, false);
+      }
     }
   }
 
@@ -8187,6 +8188,7 @@ define('src/index',['require','src/filesystem/interface','src/path','src/errors'
     Errors: require('src/errors')
   };
 });
+
 
   var Filer = require( "src/index" );
 
