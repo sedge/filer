@@ -23,13 +23,13 @@ requirejs.config({
 
 //GLOBAL.document = {};
 //GLOBAL.navigator = { userAgent: ""};
-//GLOBAL.window = {
-//  addEventListener: function(){},
+GLOBAL.window = {
+  addEventListener: function(){},
 //  navigator: navigator,
 //  document: document,
-//  setTimeout: setTimeout
-//};
-//GLOBAL.expect = require('chai').expect;
+  setTimeout: setTimeout
+};
+GLOBAL.expect = require('chai').expect;
 
 describe("Mocha needs one test in order to wait on requirejs tests", function() {
   it('should wait for other tests', function(){

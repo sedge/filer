@@ -5550,12 +5550,13 @@ define('intercom',['require','eventemitter','src/shared'],function(require) {
     var storageHandler = function() {
       self._onStorageEvent.apply(self, arguments);
     };
-    if(typeof window !== 'undefined' && typeof document !== 'undefined') {
-      if (document.attachEvent) {
-        document.attachEvent('onstorage', storageHandler);
-      } else {
-        window.addEventListener('storage', storageHandler, false);
-      }
+    if(typeof window === 'undefined' && typeof document === 'undefined') {
+      return;
+    }
+    if (document.attachEvent) {
+      document.attachEvent('onstorage', storageHandler);
+    } else {
+      window.addEventListener('storage', storageHandler, false);
     }
   }
 
