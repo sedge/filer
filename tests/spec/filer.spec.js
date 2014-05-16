@@ -8,6 +8,12 @@ define(["Filer"], function(Filer) {
     it("has FileSystem constructor", function() {
       expect(typeof Filer.FileSystem).to.equal('function');
     });
-  });
 
+    it("can be required", function() {
+      var testFil = require("../../filer"),
+          trueFil = require("dist/filer.js");
+
+      expect(testFil.toString()).to.equal(trueFil.toString());
+    });
+  });
 });

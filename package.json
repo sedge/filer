@@ -32,5 +32,6 @@
     "requirejs": "~2.1.11",
     "mocha": "~1.18.2",
     "chai": "~1.9.1"
-  }
+  },
+  "main": "./dist/filer.js"
 }
