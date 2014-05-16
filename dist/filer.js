@@ -5550,7 +5550,7 @@ define('intercom',['require','eventemitter','src/shared'],function(require) {
     var storageHandler = function() {
       self._onStorageEvent.apply(self, arguments);
     };
-    if(typeof window === 'undefined' && typeof document === 'undefined') {
+    if(typeof document === 'undefined') {
       return;
     }
     if (document.attachEvent) {
