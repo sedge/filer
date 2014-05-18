@@ -1,11 +1,13 @@
 var semver = require('semver'),
     fs = require('fs'),
-    currentVersion = JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
+    currentVersion = JSON.parse(fs.readFileSync('./package.json', 'utf8')).version,
+    env = require('./config/environment');
 
 // Globals
 var PROMPT_CONFIRM_CONFIG = 'confirmation',
-    GIT_FULL_REMOTE = 'git@github.com:sedge/filer.git issue-71',
-    GIT_BRANCH = 'issue-71';
+    GIT_BRANCH = env.get('UPSTREAM_BRANCH'),
+    GIT_REMOTE = env.get('UPSTREAM_REMOTE_NAME'),
+    GIT_FULL_REMOTE = env.get('UPSTREAM_URI') + ' ' + GIT_BRANCH;
 
 module.exports = function(grunt) {
 
@@ -29,6 +31,7 @@ module.exports = function(grunt) {
       // Don't bother with src/path.js
       all: [
         'gruntfile.js',
+        'config/environment.js',
         'src/constants.js',
         'src/errors.js',
         'src/fs.js',
@@ -110,7 +113,7 @@ module.exports = function(grunt) {
 
     'npm-checkBranch': {
       options: {
-        branch: "issue-71"
+        branch: GIT_BRANCH
       }
     },
 
@@ -158,7 +161,7 @@ module.exports = function(grunt) {
     gitpush: {
       publish: {
         options: {
-          remote: 'origin',
+          remote: GIT_REMOTE,
           branch: 'gh-pages',
           force: true
         }
@@ -202,5 +205,5 @@ module.exports = function(grunt) {
     grunt.task.run(['prompt:confirm', 'checkBranch', 'release', 'bump:' + patchLevel, 'gitcheckout:publish', 'gitpush:publish', 'gitcheckout:revert']); // TODO: ADD NPM RELEASE
   });
 
-   grunt.registerTask('default', ['develop']);
+  grunt.registerTask('default', ['develop']);
 };

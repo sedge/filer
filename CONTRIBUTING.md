@@ -42,6 +42,10 @@ to the `AUTHORS` file.
 * Force push the `gh-pages` branch to `origin/gh-pages`
 * Publish the new version of the module to NPM
 
+#### How to configure
+1. Copy `env.sample` to `.env`
+2. Modify as needed, or leave alone for defaults
+
 #### How to Publish
 `grunt publish` can be run in four ways:
 
