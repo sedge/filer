@@ -210,8 +210,7 @@ module.exports = function(grunt) {
       'bump:' + patchLevel,
       'gitcheckout:publish',
       'gitpush:publish',
-      'gitcheckout:revert',
-      'npm-publish'
+      'gitcheckout:revert'
     ]);
   });
 
