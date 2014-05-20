@@ -104,7 +104,7 @@ module.exports = function(grunt) {
         commitMessage: 'Release v%VERSION%',
         commitFiles: ['package.json', 'bower.json', './dist/filer.js', './dist/filer.min.js'],
         createTag: true,
-        tagName: 'v%VERSION%',
+        tagName: '%VERSION%',
         tagMessage: 'Version %VERSION%',
         push: true,
         pushTo: GIT_FULL_REMOTE
