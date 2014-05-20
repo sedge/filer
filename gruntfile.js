@@ -5,9 +5,9 @@ var semver = require('semver'),
 
 // Globals
 var PROMPT_CONFIRM_CONFIG = 'confirmation',
-    GIT_BRANCH = env.get('UPSTREAM_BRANCH'),
-    GIT_REMOTE = env.get('UPSTREAM_REMOTE_NAME'),
-    GIT_FULL_REMOTE = env.get('UPSTREAM_URI') + ' ' + GIT_BRANCH;
+    GIT_BRANCH = env.get('FILER_UPSTREAM_BRANCH'),
+    GIT_REMOTE = env.get('FILER_UPSTREAM_REMOTE_NAME'),
+    GIT_FULL_REMOTE = env.get('FILER_UPSTREAM_URI') + ' ' + GIT_BRANCH;
 
 module.exports = function(grunt) {
 
@@ -202,7 +202,16 @@ module.exports = function(grunt) {
       ' to ' + semver.inc(currentVersion, patchLevel).yellow + '?';
     grunt.config('prompt.confirm.options', promptOpts);
 
-    grunt.task.run(['prompt:confirm', 'checkBranch', 'release', 'bump:' + patchLevel, 'gitcheckout:publish', 'gitpush:publish', 'gitcheckout:revert']); // TODO: ADD NPM RELEASE
+    // TODO: ADD NPM RELEASE
+    grunt.task.run([
+      'prompt:confirm',
+      'checkBranch',
+      'release',
+      'bump:' + patchLevel,
+      'gitcheckout:publish',
+      'gitpush:publish',
+      'gitcheckout:revert'
+    ]);
   });
 
   grunt.registerTask('default', ['develop']);

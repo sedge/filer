@@ -29,7 +29,6 @@ unit tests pass, including any new tests you wrote. Finally, make sure you add y
 to the `AUTHORS` file.
 
 ### Releasing a new version
-**NOTE:** This step should only ever be attempted by the owner of the repo (@modeswitch).
 
 `grunt publish` will:
 
