@@ -36,7 +36,7 @@ requirejs.config({
 });
 
 // We use Chai's expect assertions in all the tests via a global
-GLOBAL.expect = require('chai').expect;
+GLOBAL.expect =  require('chai').expect;
 
 // Workaround for Mocha bug, see https://github.com/visionmedia/mocha/issues/362
 describe("Mocha needs one test in order to wait on requirejs tests", function() {
