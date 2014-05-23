@@ -38,6 +38,7 @@ define([
   "spec/time-flags.spec",
   "spec/fs.watch.spec",
   "spec/errors.spec",
+  "spec/lib.spec",
 
   // Filer.FileSystem.providers.*
   "spec/providers/providers.spec",
@@ -66,6 +67,9 @@ define([
   "spec/node-js/simple/test-fs-null-bytes",
   "spec/node-js/simple/test-fs-watch",
   "spec/node-js/simple/test-fs-watch-recursive",
+
+  // Nodejs compatibility
+  "spec/node-js/simple/nodejs.spec",
 
   // Regressions, Bugs
   "bugs/issue105",
