@@ -426,4 +426,79 @@ Shell.prototype.mkdirp = function(path, callback) {
   _mkdirp(path, callback);
 };
 
+/**
+ * Print a flattened array of a file, or files in a directory
+ * and their sizes in bytes.
+ */
+Shell.prototype.du = function(path, callback) {
+  var sh = this;
+  var fs = sh.fs;
+
+  if (typeof path === 'function') {
+    callback = path;
+    path = this.pwd();
+  }
+  var finalSizes = {};
+  finalSizes.entries = [];
+  finalSizes.total = 0;
+
+  fs.stat(path, function(err, stats) {
+    if (err) {
+      callback(err);
+    }
+
+    if (stats.type === "DIRECTORY") {
+      var dirSize = 0;
+      var dirEntry = {};
+      var dirIndex = finalSizes.entries.length;
+
+      finalSizes.entries.push(dirEntry);
+
+      fs.readdir(path, function(err, result) {
+        if (err) {
+          return callback(err);
+        }
+
+        if (!result.length){
+          finalSizes.entries[dirIndex][path] = 0;
+          return callback(null, finalSizes);
+        }
+
+        async.eachSeries(result, function(node, callback){
+          node = Path.join(path, node);
+
+          sh.du(node, function(err, nodeSizes) {
+            if (err) {
+              callback(err);
+            }
+
+            finalSizes.entries = finalSizes.entries.concat(nodeSizes.entries);
+            finalSizes.total += nodeSizes.total;
+            dirSize += nodeSizes.total;
+
+            callback();
+          });
+        }, function(err) {
+          if (err) {
+            return callback(err);
+          }
+
+          finalSizes.entries[dirIndex][path] = dirSize;
+
+          callback(null, finalSizes);
+        });
+      });
+
+      return;
+    }
+
+    finalSizes.entries[0] = {};
+    finalSizes.entries[0][path] = stats.size;
+
+    finalSizes.total += stats.size;
+
+    callback(null, finalSizes);
+  })
+}
+
 module.exports = Shell;
