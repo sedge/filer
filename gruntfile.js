@@ -125,8 +125,6 @@ module.exports = function(grunt) {
             {
               config: PROMPT_CONFIRM_CONFIG,
               type: 'confirm',
-              message: 'Bump version from ' + (currentVersion).cyan +
-                          ' to ' + semver.inc(currentVersion, "patch").yellow + '?',
               default: false
             }
           ],
@@ -163,21 +161,11 @@ module.exports = function(grunt) {
       }
     },
 
-    gitpull: {
-      publish: {
-        options: {
-          remote: GIT_REMOTE,
-          branch: 'develop',
-          force: true
-        },
-      }
-    },
-
     gitcommit: {
       publish: {
         options: {
           message: 'Tests for Filer v' +
-            JSON.parse(fs.readFileSync('./package.json', 'utf8')).version,
+            grunt.config("newVersion"),
           noStatus: true
         }
       }
@@ -240,6 +228,9 @@ module.exports = function(grunt) {
     promptOpts.questions[0].message =  'Bump version from ' + (currentVersion).cyan +
       ' to ' + semver.inc(currentVersion, patchLevel).yellow + '?';
     grunt.config('prompt.confirm.options', promptOpts);
+
+    // Store the new patch level
+    grunt.config('newVersion', semver.inc(currentVersion, patchLevel));
 
     grunt.task.run([
       'prompt:confirm',
