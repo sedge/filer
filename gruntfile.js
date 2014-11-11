@@ -246,14 +246,13 @@ module.exports = function(grunt) {
       'checkBranch',
       'release',
       'bump:' + patchLevel,
-      'gitcheckout:publish',
-      'gitpull:publish',
       'build-tests',
+      'gitcheckout:publish',
       'gitadd:publish',
       'gitcommit:publish',
       'gitpush:publish',
-      'gitcheckout:revert',
-      'npm-publish'
+      'gitcheckout:revert'
+      // 'npm-publish'
     ]);
   });
   grunt.registerTask('test-node', ['jshint', 'browserify:filerIssue225', 'connect:serverForNode', 'shell:mocha']);
