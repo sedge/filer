@@ -164,8 +164,6 @@ module.exports = function(grunt) {
     gitcommit: {
       publish: {
         options: {
-          message: 'Tests for Filer v' +
-            grunt.config("newVersion"),
           noStatus: true
         }
       }
@@ -229,8 +227,9 @@ module.exports = function(grunt) {
       ' to ' + semver.inc(currentVersion, patchLevel).yellow + '?';
     grunt.config('prompt.confirm.options', promptOpts);
 
-    // Store the new patch level
-    grunt.config('newVersion', semver.inc(currentVersion, patchLevel));
+    // Store the new patch level in the gh-pages commit message
+    var ghPagesMessage = 'Tests for Filer v' + semver.inc(currentVersion, patchLevel);
+    grunt.config('gitcommit.publish.options.message', ghPagesMessage);
 
     grunt.task.run([
       'prompt:confirm',
