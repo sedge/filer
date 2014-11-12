@@ -280,10 +280,10 @@ module.exports = function(grunt) {
       'gitstash:publish',
       'gitcheckout:publish',
       'gitrm:publish',
-      'gitstash:pop'
-      // 'gitcommit:publish',
-      // 'gitpush:publish',
-      // 'gitcheckout:revert'
+      'gitstash:pop',
+      'gitcommit:publish',
+      'gitpush:publish',
+      'gitcheckout:revert'
       // 'npm-publish'
     ]);
   });
