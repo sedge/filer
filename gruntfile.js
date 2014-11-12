@@ -215,6 +215,9 @@ module.exports = function(grunt) {
       publish: {
         options: {
           position: "top"
+        },
+        files: {
+          src: ['./dist/filer-test.js']
         }
       }
     }
