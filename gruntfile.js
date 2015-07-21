@@ -361,11 +361,11 @@ module.exports = function(grunt) {
       'gitstash:publish',
       'gitcheckout:publish',
       'gitrm:publish',
-      'gitstash:pop',
-      'gitcommit:publish',
-      'gitpush:publish',
-      'gitcheckout:revert',
-      'npm-publish'
+      'gitstash:pop'
+      // 'gitcommit:publish',
+      // 'gitpush:publish',
+      // 'gitcheckout:revert',
+      // 'npm-publish'
     ]);
   });
   grunt.registerTask('test-node', ['jshint', 'browserify:filerIssue225', 'shell:mocha']);
